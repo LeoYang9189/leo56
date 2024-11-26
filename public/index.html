@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>航运百事通 - EORI 验证系统</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/verification.css">
+    <!-- 添加 Font Awesome 图标 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- 添加 Lottie 动画 -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+</head>
+<body class="font-sans antialiased">
+    <!-- Header -->
+    <header class="fixed w-full bg-white/90 backdrop-blur-md z-50">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="text-2xl font-bold">航运<span class="text-blue-600">百事通</span></div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#features" class="hover:text-blue-600">功能</a>
+                    <a href="#how-it-works" class="hover:text-blue-600">使用方法</a>
+                    <a href="#faq" class="hover:text-blue-600">常见问题</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Section -->
+    <section class="pt-32 pb-20 bg-gradient-to-b from-gray-50 to-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-6xl mx-auto">
+                <!-- 顶部装饰元素 -->
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
+                
+                <!-- 主标题区域 -->
+                <div class="flex flex-col md:flex-row items-center justify-between mb-16">
+                    <div class="md:w-1/2 text-left mb-8 md:mb-0">
+                        <h1 class=""text-5xl font-bold mb-6 text-gray-900"">
+                            专业的 EORI 验证系统
+                            <span class="text-blue-600 block">助力跨境贸易</span>
+                        </h1>
+                        <p class="text-xl text-gray-700 mb-8">
+                            使用欧盟官方认证接口，快速准确验证 EORI 号码的有效性
+                        </p>
+                        <!-- 点标签 -->
+                        <div class="flex flex-wrap gap-4 mb-8">
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                                <i class="fas fa-check-circle mr-2"></i>
+                                官方认证
+                            </span>
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                                <i class="fas fa-bolt mr-2"></i>
+                                快速响应
+                            </span>
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
+                                <i class="fas fa-shield-alt mr-2"></i>
+                                安全可靠
+                            </span>
+                        </div>
+                    </div>
+                    <!-- 右侧动画 -->
+                    <div class="md:w-1/2">
+                        <lottie-player 
+                            src="https://assets5.lottiefiles.com/packages/lf20_bhebjzpu.json"
+                            background="transparent"
+                            speed="1"
+                            style="width: 100%; height: 400px;"
+                            loop
+                            autoplay>
+                        </lottie-player>
+                    </div>
+                </div>
+    
+                <!-- 验证区域 -->
+                <div class="max-w-xl mx-auto">
+                    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+                        <div class="flex items-center mb-6">
+                            <i class="fas fa-search text-blue-600 text-xl mr-3"></i>
+                            <h2 class="text-xl font-semibold">EORI 验证</h2>
+                        </div>
+                        <input type="text" 
+                               id="eoriInput"
+                               placeholder="请输入 EORI 号码" 
+                               class="w-full px-4 py-3 rounded-lg border border-gray-200 mb-4 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                        >
+                        <button onclick="validateEORI()" 
+                                id="validateBtn"
+                                class="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-300 flex items-center justify-center">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            开始验证
+                        </button>
+                    </div>
+                    
+                    <!-- 验证结果区域 -->
+                    <div id="resultArea" class="mt-6 hidden">
+                        <div class="bg-white p-6 rounded-xl shadow-lg">
+                            <div class="border-b pb-4 mb-4">
+                                <h3 class="text-xl font-semibold mb-2">验证结果</h3>
+                                <p id="statusText" class="text-lg"></p>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="text-gray-600">EORI 号码:</div>
+                                    <div id="eoriNumber" class="font-medium"></div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="text-gray-600">状态:</div>
+                                    <div id="status" class="font-medium"></div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="text-gray-600">企业名称:</div>
+                                    <div id="name" class="font-medium"></div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="text-gray-600">地址:</div>
+                                    <div id="address" class="font-medium"></div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="text-gray-600">邮编:</div>
+                                    <div id="postalCode" class="font-medium"></div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="text-gray-600">城市:</div>
+                                    <div id="city" class="font-medium"></div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="text-gray-600">国家:</div>
+                                    <div id="country" class="font-medium"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 历史记录区域 -->
+                    <div id="historyArea" class="mt-8 hidden">
+                        <div class="bg-white p-6 rounded-xl shadow-lg">
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="text-xl font-semibold">验证记录</h3>
+                                <button onclick="exportToCSV()" 
+                                        class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                    </svg>
+                                    导出记录
+                                </button>
+                            </div>
+                            <div id="historyList" class="space-y-4">
+                                <!-- 历史记录将在这里显示 -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12">主要功能</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">实时验证</h3>
+                    <p class="text-gray-600">直接对接欧盟官方接口，确保数据真实可靠</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">快速响应</h3>
+                    <p class="text-gray-600">毫秒级响应速度，即时获取验证结果</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">便捷复制</h3>
+                    <p class="text-gray-600">一键复制验证结果中的任何信息</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it Works Section -->
+    <section id="how-it-works" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12">使用方法</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-blue-600 mb-4">1</div>
+                        <h3 class="text-xl font-semibold mb-2">输入号码</h3>
+                        <p class="text-gray-600">在验证框中输入需要验证的 EORI 号码</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-blue-600 mb-4">2</div>
+                        <h3 class="text-xl font-semibold mb-2">点击验证</h3>
+                        <p class="text-gray-600">系统将通过官方接口进行验证</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-blue-600 mb-4">3</div>
+                        <h3 class="text-xl font-semibold mb-2">查看结果</h3>
+                        <p class="text-gray-600">获取详细的验证结果和企业信息</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12">常见问题</h2>
+            <div class="max-w-3xl mx-auto space-y-6">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-semibold mb-2">什么是 EORI 号码？</h3>
+                    <p class="text-gray-600">EORI（Economic Operators Registration and Identification）是欧盟经济经营者注册与识别号码，用于识别与海关事务相关的经济运营商。</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-semibold mb-2">如何获取 EORI 号码？</h3>
+                    <p class="text-gray-600">您需要向欧盟成员国的海关当局申请。具体流程可能因不同国家而异。</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-semibold mb-2">验证结果包含哪些信息？</h3>
+                    <p class="text-gray-600">验证结果将显示 EORI 号码的有效性、注册国家、企业名称等关键信。所有信息均来自欧盟官方数据库。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h4 class="text-xl font-bold mb-4">航运百事通</h4>
+                    <p class="text-gray-400">专业的 EORI 验证服务提供商</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">快速链接</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#features" class="text-gray-400 hover:text-white">功能</a></li>
+                        <li><a href="#how-it-works" class="text-gray-400 hover:text-white">使用方法</a></li>
+                        <li><a href="#faq" class="text-gray-400 hover:text-white">常见问题</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">联系我们</h4>
+                    <p class="text-gray-400">邮箱：gm@leotech.site</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">关注我们</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>© 2024 航运百事通. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/scripts.js"></script>
+</body>
+</html>

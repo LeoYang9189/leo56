@@ -1,0 +1,17 @@
+{
+  "name": "eori-verification",
+  "version": "1.0.0",
+  "private": "true",
+  "scripts": {
+    "start": "node api/validate-eori.js",
+    "dev": "nodemon api/validate-eori.js"
+  },
+  "dependencies": {
+    "node-fetch": "2.6.7",
+    "express": "^4.18.2",
+    "cors": "^2.8.5"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

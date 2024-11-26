@@ -1,0 +1,62 @@
+/* 验证表单样式 */
+.verification-form {
+    background: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* 验证结果卡片样式 */
+.result-card {
+    background: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+}
+
+.result-card:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* 验证状态标签 */
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
+.status-badge.valid {
+    background-color: #D1FAE5;
+    color: #059669;
+}
+
+.status-badge.invalid {
+    background-color: #FEE2E2;
+    color: #DC2626;
+}
+
+/* 历史记录项样式 */
+.history-item {
+    border-bottom: 1px solid #E5E7EB;
+    padding: 1rem 0;
+    transition: background-color 0.2s ease;
+}
+
+.history-item:hover {
+    background-color: #F9FAFB;
+}
+
+/* 加载动画 */
+.loading-spinner {
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #3B82F6;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+} 
