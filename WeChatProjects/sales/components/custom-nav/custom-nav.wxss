@@ -1,0 +1,16 @@
+.custom-navigation-bar {
+  background: #FFFFFF;
+  width: 100%;
+}
+
+.navigation-content {
+  display: flex;
+  align-items: center;
+  padding: 0 32rpx;
+}
+
+.navigation-title {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #333333;
+} 
