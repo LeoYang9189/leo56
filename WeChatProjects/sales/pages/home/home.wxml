@@ -1,0 +1,59 @@
+<custom-nav title="销售助手"></custom-nav>
+
+<view class="container">
+  <!-- 搜索框 -->
+  <view class="search-container">
+    <view class="search-box">
+      <input type="text" placeholder="搜索客户/名片" placeholder-class="placeholder-style"/>
+      <image class="search-icon" src="/assets/icons/search.png" mode="aspectFit"></image>
+    </view>
+  </view>
+
+  <!-- 金刚区 -->
+  <view class="quick-actions">
+    <view class="quick-actions-inner">
+      <view class="action-items">
+        <view class="action-item" wx:for="{{quickActions}}" wx:key="id" bindtap="onActionTap" data-id="{{item.id}}">
+          <image src="{{item.icon}}" mode="aspectFit"></image>
+          <text>{{item.name}}</text>
+        </view>
+      </view>
+      <view class="customize-btn">自定义</view>
+    </view>
+  </view>
+
+  <!-- 数据统计 -->
+  <view class="stats-panel">
+    <view class="stats-inner">
+      <view class="panel-title">今日概览</view>
+      <view class="stats-grid">
+        <view class="stats-item">
+          <text class="num">{{todayStats.customers}}</text>
+          <text class="label">新增客户</text>
+        </view>
+        <view class="stats-item">
+          <text class="num">{{todayStats.inquiries}}</text>
+          <text class="label">新询价</text>
+        </view>
+        <view class="stats-item">
+          <text class="num">{{todayStats.quotes}}</text>
+          <text class="label">已报价</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 待办事项 -->
+  <view class="todo-panel">
+    <view class="todo-inner">
+      <view class="panel-title">待办事项</view>
+      <view class="todo-list">
+        <view class="todo-item" wx:for="{{todoList}}" wx:key="id">
+          <view class="todo-tag {{item.type}}">{{item.tagText}}</view>
+          <view class="todo-content">{{item.content}}</view>
+          <view class="todo-time">{{item.time}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view> 
